@@ -2,6 +2,10 @@
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 
+#include "i2cpwm_board/ServosConfig.h"
+#include "i2cpwm_board/ServoArray.h"
+#include "i2cpwm_board/ServoConfig.h"
+
 class TeleopTurtle
 {
 public:
@@ -41,6 +45,23 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "teleop_turtle");
+    i2cpwm_board::ServosConfig srv;
+    i2cpwm_board::ServoArray servos;
+    i2cpwm_board::ServoConfig servo1;
+    servo1.servo = 1;
+    servo1.center = 333;
+    servo1.range = 100;
+    servo1.direction = -1;
+    servos.push_back(servo1);
+
+    i2cpwm_board::ServoConfig servo2;
+    servo2.servo = 2;
+    servo2.center = 336;
+    servo2.range = 108;
+    servo2.direction = 1;
+    servos.push_back(servo2);
+
+    ROS_INFO(servos);
     TeleopTurtle teleop_turtle;
 
     ros::spin();
