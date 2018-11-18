@@ -46,7 +46,8 @@ int main(int argc, char** argv)
 {
     ros::init(argc, argv, "teleop_turtle");
     i2cpwm_board::ServosConfig srv;
-    i2cpwm_board::ServoArray servos;
+    std::vector<i2cpwm_board::ServoConfig> servos;
+
     i2cpwm_board::ServoConfig servo1;
     servo1.servo = 1;
     servo1.center = 333;
