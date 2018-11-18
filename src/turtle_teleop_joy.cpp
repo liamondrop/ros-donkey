@@ -61,7 +61,6 @@ int main(int argc, char** argv)
     servo2.direction = 1;
     servos.push_back(servo2);
 
-    ROS_INFO(servos);
     TeleopTurtle teleop_turtle;
 
     ros::spin();
