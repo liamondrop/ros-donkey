@@ -10,7 +10,7 @@ project(ros_donkey)
 find_package(catkin REQUIRED COMPONENTS
   joy
   roscpp
-  turtlesim
+  i2cpwm_board
 )
 
 ## System dependencies are found with CMake's conventions
