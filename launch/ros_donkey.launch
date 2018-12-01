@@ -1,6 +1,6 @@
 <launch>
   <!-- Turtlesim Node-->
-  <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
+  <!-- <node pkg="turtlesim" type="turtlesim_node" name="sim"/> -->
 
   <!-- joy node -->
   <node respawn="true" pkg="joy" type="joy_node" name="turtle_joy">
@@ -30,4 +30,6 @@
       - {servo: 1, center: 333, direction: -1, range: 100}
       - {servo: 2, center: 336, direction: 1, range: 108}
   </rosparam>
+
+  <node pkg="i2cpwm_board" name="i2cpwm_board_node" type="i2cpwm_board" output="screen" launch-prefix="sudo -E " />
 </launch>
