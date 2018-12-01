@@ -27,7 +27,7 @@
         - {servo: 2, position: 1}
 
     servo_config:
-      - {servo: 1, center: 333, direction: -1, range: 100}
+      - {servo: 1, center: 333, direction: 1, range: 100}
       - {servo: 2, center: 336, direction: 1, range: 108}
   </rosparam>
 
