@@ -2,9 +2,9 @@
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/Joy.h>
 
-#include "i2cpwm_board/ServosConfig.h"
+// messages used for the absolute and proportional movement topics
+#include "i2cpwm_board/Servo.h"
 #include "i2cpwm_board/ServoArray.h"
-#include "i2cpwm_board/ServoConfig.h"
 
 class TeleopTurtle
 {
@@ -40,28 +40,17 @@ void TeleopTurtle::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
     twist.angular.z = a_scale_ * joy->axes[angular_];
     twist.linear.x = l_scale_ * joy->axes[linear_];
     vel_pub_.publish(twist);
+
+
 }
+
+// rosservice call /config_drive_mode "{mode: ackerman, rpm: 56.0, radius: 0.038, track: 0.18, scale: 1.0, servos: [{servo: 1, position: 1}, {servo: 2, position: 1}]}"
+
+// rosservice call /config_servos "servos: [{servo: 1, center: 333, range: 100, direction: 1}, {servo: 2, center: 336, range: 108, direction: -1}]"
 
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "teleop_turtle");
-    i2cpwm_board::ServosConfig srv;
-    std::vector<i2cpwm_board::ServoConfig> servos;
-
-    i2cpwm_board::ServoConfig servo1;
-    servo1.servo = 1;
-    servo1.center = 333;
-    servo1.range = 100;
-    servo1.direction = -1;
-    servos.push_back(servo1);
-
-    i2cpwm_board::ServoConfig servo2;
-    servo2.servo = 2;
-    servo2.center = 336;
-    servo2.range = 108;
-    servo2.direction = 1;
-    servos.push_back(servo2);
-
     TeleopTurtle teleop_turtle;
 
     ros::spin();

@@ -1,14 +1,33 @@
 <launch>
+  <!-- Turtlesim Node-->
+  <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
+
   <!-- joy node -->
-  <node respawn="true" pkg="joy" type="joy_node" name="turtle_joy" >
+  <node respawn="true" pkg="joy" type="joy_node" name="turtle_joy">
     <param name="dev" type="string" value="/dev/input/js0" />
     <param name="deadzone" value="0.12" />
   </node>
 
   <!-- Axes -->
   <param name="axis_linear" value="1" type="int"/>
-  <param name="axis_angular" value="0" type="int"/>
+  <param name="axis_angular" value="3" type="int"/>
   <param name="scale_linear" value="2" type="double"/>
   <param name="scale_angular" value="2" type="double"/>
-  <node pkg="ros_donkey" type="turtle_teleop_joy" name="teleop"/>
+  <node pkg="ros_donkey" type="turtle_teleop_joy" name="teleop" />
+
+  <rosparam>
+    drive_config:
+      mode: ackerman
+      radius: 0.038
+      rpm: 56.0
+      scale: 1.0
+      track: 0.18
+      servos:
+        - {servo: 1, position: 1}
+        - {servo: 2, position: 1}
+
+    servo_config:
+      - {servo: 1, center: 333, direction: -1, range: 100}
+      - {servo: 2, center: 336, direction: 1, range: 108}
+  </rosparam>
 </launch>
