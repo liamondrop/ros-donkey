@@ -1,4 +1,4 @@
-# import Adafruit_PCA9685
+import Adafruit_PCA9685
 import rospy
 from geometry_msgs.msg import Twist
 from donkey_actuator.msg import Servo
