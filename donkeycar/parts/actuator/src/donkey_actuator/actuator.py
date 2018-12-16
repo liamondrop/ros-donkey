@@ -6,7 +6,7 @@ from donkey_actuator.msg import Servo
 from geometry_msgs.msg import Twist
 
 
-def map_value_to_pulse_(servo, value):
+def map_value_to_pwm_(servo, value):
     if value < -1.0001 or value > 1.0001:
         rospy.logerr('({}) value must be between -1.0 and 1.0'.format(value))
         return 0
