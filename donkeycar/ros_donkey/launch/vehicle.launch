@@ -7,8 +7,9 @@
       camera_info_url: package://raspicam_node/camera_info/camerav1_1280x720.yaml
       camera_name: camerav1_1280x720
       enable_raw: false
-      width: 1280
-      height: 720
+      exposure_mode: antishake
+      width: 160
+      height: 120
       framerate: 90
 
     servos:
@@ -27,7 +28,5 @@
 
   <node name="actuator" pkg="donkey_actuator" type="actuator_node" output="screen" />
 
-  <node type="raspicam_node" pkg="raspicam_node" name="raspicam_node" output="screen" />
-</launch>
-
+  <node pkg="raspicam_node" type="raspicam_node" name="raspicam_node" />
 </launch>
