@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node name="ros_donkey_keras" pkg="ros_donkey_keras" type="ros_donkey_keras_node" />
+</launch>

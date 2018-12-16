@@ -1,7 +1,9 @@
-# ROS Donkey
+# ros_donkey_keras
 
-> Exploring ROS on the Donkeycar Platform
 
+> A starter template for creating ROS nodes in Python
+
+TODO: Fill out this long description.
 
 ## Table of Contents
 
@@ -15,10 +17,10 @@
 ## Install
 
 ```
-mkdir -p ~/donkey_ws/src
-cd ~/donkey_ws/src
-git clone git@github.com:liamondrop/ros-donkey.git
-cd ~/donkey_ws
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+git clone git@github.com:liamondrop/ros_donkey_keras.git
+cd ~/catkin_ws
 catkin_make
 source devel/setup.bash
 ```
@@ -26,6 +28,8 @@ source devel/setup.bash
 ## Usage
 
 ```
+cd ~/catkin_ws
+roslaunch ros_donkey_keras ros_donkey_keras.launch
 ```
 
 ## API

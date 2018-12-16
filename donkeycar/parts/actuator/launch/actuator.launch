@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+  <rosparam>
+    servos:
+      pwm_frequency: 50
+      throttle:
+        channel: 0
+        center: 320
+        direction: 1
+        range: 120
+      steering:
+        channel: 1
+        center: 325
+        direction: 1
+        range: 160
+  </rosparam>
+
+  <node name="actuator" pkg="donkey_actuator" type="actuator_node" output="screen" />
+</launch>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ros_donkey)
+project(donkey_joy)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 add_compile_options(-std=c++11)
@@ -10,7 +10,6 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   joy
   roscpp
-  i2cpwm_board
 )
 
 ## System dependencies are found with CMake's conventions
