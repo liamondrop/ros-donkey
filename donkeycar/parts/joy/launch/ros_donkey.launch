@@ -1,6 +1,4 @@
 <launch>
-  <!-- Turtlesim Node-->
-  <node pkg="turtlesim" type="turtlesim_node" name="sim"/>
 
   <!-- joy node -->
   <node respawn="true" pkg="joy" type="joy_node" name="turtle_joy">

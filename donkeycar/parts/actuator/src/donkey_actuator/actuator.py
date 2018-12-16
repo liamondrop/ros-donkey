@@ -41,7 +41,10 @@ class Actuator:
         $ rostopic pub servo_absolute donkey_actuator/Servo "{name: steering, value: 335}"
         $ rostopic pub servo_absolute donkey_actuator/Servo "{name: steering, value: 333}"
         """
-        self.set_servo_pulse_(self.servos[msg.name], int(msg.value))
+        servo = self.servos[msg.name]
+        self.set_servo_pulse_(servo, int(msg.value))
+        rospy.loginfo('servo: {}, channel: {}, value: {}'.format(
+            msg.name, servo['channel'], value))
 
     def servos_drive_cb_(self, msg):
         """
@@ -64,8 +67,6 @@ class Actuator:
     def set_servo_pulse_(self, servo, value):
         channel = servo['channel']
         self.controller.set_pwm(channel, 0, value)
-        rospy.loginfo('servo: {}, channel: {}, value: {}'.format(
-            servo_name, channel, value))
 
     def set_servo_proportional_(self, servo, value):
         pulse = map_value_to_pwm_(servo, value)
