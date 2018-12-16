@@ -11,6 +11,7 @@
 
   <depend>rospy</depend>
   <depend>geometry_msgs</depend>
+  <depend>adafruit-pca9685-pip</depend>
 
   <build_depend>std_msgs</build_depend>
   <build_depend>message_generation</build_depend>
