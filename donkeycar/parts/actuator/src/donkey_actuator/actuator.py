@@ -65,8 +65,7 @@ class Actuator:
         self.set_servo_pulse_(servo, servo['center'])
 
     def set_servo_pulse_(self, servo, value):
-        channel = servo['channel']
-        self.controller.set_pwm(channel, 0, value)
+        self.controller.set_pwm(servo['channel'], 0, value)
 
     def set_servo_proportional_(self, servo, value):
         pulse = map_value_to_pwm_(servo, value)
