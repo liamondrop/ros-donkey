@@ -5,13 +5,26 @@
 
 ## Table of Contents
 
+- [Background](#background)
 - [Dependencies](#dependencies)
 - [Install](#install)
 - [Usage](#usage)
-- [API](#api)
+- [Todo](#todo)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Background
+
+If you take a look at the [architecture](https://github.com/autorope/donkeycar/blob/dev/donkeycar/templates/donkey2.py) of the Donkey Car v2, you'll notice that it is organized as a set of modules. Each module is capable of accepting some input and giving some output, using the central `Memory` module as their source and sink. Also, there's a utility for recording a video stream along with synchronized throttle and steering commands so that a Deep Learning model can be trained. Here's a picture.
+
+![Donkey Car Architecture](images/donkey_car_architecture)
+
+The arrows represent various inputs and outputs (the names of these omitted to keep the picture legible). This maps very closely to the way ROS projects are typically organized, in that inputs and outputs are handled by ROS topics and parameters, events are stored for playback in rosbags. Here's another picture, this time with the arrows standing in for ROS topics and parameters.
+
+![ROS Donkey Architecture](images/ros_donkey_architecture)
+
+The bits in gray haven't yet been implemented, and the rosbag recording hasn't been attempted yet, though it should work without too much extra fuss.
 
 ## Dependencies
 
@@ -71,6 +84,14 @@ roslaunch ros_donkey vehicle.launch
 
 This will bring up the servo actuator, joystick controller, and raspicam nodes.
 
+## Still left TODO
+
+ - Implement the Keras node
+ - Add Timestamp to Actuator commands so that events are properly synced
+ - Saving to Rosbags for replay and training
+ - State machine for managing drive mode (manual vs autonomous)
+ - Local Web Controller for video streaming and control from a phone/computer
+ - Build everything from scratch to make sure I didn't leave out some crucial steps in setup (probably did, sorry)
 
 ## Maintainers
 
