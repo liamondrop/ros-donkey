@@ -18,11 +18,11 @@
 
 If you take a look at the [architecture](https://github.com/autorope/donkeycar/blob/dev/donkeycar/templates/donkey2.py) of the Donkey Car v2, you'll notice that it is organized as a set of modules. Each module is capable of accepting some input and giving some output, using the central `Memory` module as their source and sink. Also, there's a utility for recording a video stream along with synchronized throttle and steering commands so that a Deep Learning model can be trained. Here's a picture.
 
-![Donkey Car Architecture](https://github.com/liamondrop/ros-donkey/images/donkey_car_architecture)
+![Donkey Car Architecture](./images/donkey_car_architecture.png)
 
 The arrows represent various inputs and outputs (the names of these omitted to keep the picture legible). This maps very closely to the way ROS projects are typically organized, in that inputs and outputs are handled by ROS topics and parameters, events are stored for playback in rosbags. Here's another picture, this time with the arrows standing in for ROS topics and parameters.
 
-![ROS Donkey Architecture](https://github.com/liamondrop/ros-donkey/images/ros_donkey_architecture)
+![ROS Donkey Architecture](./images/ros_donkey_architecture.png)
 
 The bits in gray haven't yet been implemented, and the rosbag recording hasn't been attempted yet, though it should work without too much extra fuss.
 
