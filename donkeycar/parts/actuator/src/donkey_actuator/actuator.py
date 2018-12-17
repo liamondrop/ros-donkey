@@ -1,6 +1,5 @@
 import Adafruit_PCA9685
 import rospy
-import time
 
 from donkey_actuator.msg import Servo
 from geometry_msgs.msg import Twist
@@ -22,7 +21,7 @@ class Actuator:
 
         # send center pulse to throttle servo to calibrate ESC
         self.set_servo_center_(self.servos['throttle'])
-        time.sleep(1)
+        rospy.sleep(1)
 
         # initiate subscribers
         rospy.Subscriber('servo_absolute', Servo, self.servo_absolute_cb_)

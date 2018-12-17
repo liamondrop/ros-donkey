@@ -1,32 +1,8 @@
 <?xml version="1.0"?>
 <launch>
-  <rosparam>
-    raspicam_node:
-      camera_frame_id: raspicam
-      camera_id: 0
-      camera_info_url: package://raspicam_node/camera_info/camerav1_1280x720.yaml
-      camera_name: camerav1_1280x720
-      enable_raw: false
-      exposure_mode: antishake
-      width: 160
-      height: 120
-      framerate: 90
+  <rosparam command="load" file="$(find ros_donkey)/config.yaml" />
 
-    servos:
-      pwm_frequency: 50
-      throttle:
-        channel: 0
-        center: 320
-        direction: 1
-        range: 120
-      steering:
-        channel: 1
-        center: 325
-        direction: 1
-        range: 160
-  </rosparam>
-
-  <node name="actuator" pkg="donkey_actuator" type="actuator_node" output="screen" />
-
-  <node pkg="raspicam_node" type="raspicam_node" name="raspicam_node" />
+  <node name="donkey_actuator" pkg="donkey_actuator" type="actuator_node" />
+  <node name="donkey_joy" pkg="donkey_joy" type="donkey_joy_node" />
+  <node name="raspicam_node" pkg="raspicam_node" type="raspicam_node" />
 </launch>

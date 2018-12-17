@@ -13,7 +13,7 @@ add_message_files(FILES Servo.msg)
 generate_messages(DEPENDENCIES std_msgs)
 catkin_package(CATKIN_DEPENDS message_runtime)
 
-install(DIRECTORY launch msg
+install(DIRECTORY msg
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

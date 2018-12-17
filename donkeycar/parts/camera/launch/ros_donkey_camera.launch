@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-  <node name="ros_donkey_camera" pkg="ros_donkey_camera" type="ros_donkey_camera_node" />
-</launch>

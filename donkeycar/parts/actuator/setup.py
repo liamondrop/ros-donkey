@@ -6,7 +6,7 @@ from catkin_pkg.python_setup import generate_distutils_setup
 d = generate_distutils_setup(
     packages=['donkey_actuator'],
     package_dir={'': 'src'},
-    scripts=['bin/actuator_node']
+    scripts=['bin/donkey_actuator_node']
 )
 
 setup(**d)

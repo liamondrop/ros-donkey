@@ -2,20 +2,18 @@
 <package format="2">
   <name>donkey_actuator</name>
   <version>0.0.0</version>
-  <description>donkey_actuator description</description>
+  <description>The donkey_actuator package</description>
   <maintainer email="liamondrop@gmail.com">Liam Bowers</maintainer>
 
   <license>MIT</license>
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>rospy</depend>
-  <depend>geometry_msgs</depend>
   <depend>adafruit-pca9685-pip</depend>
+  <depend>geometry_msgs</depend>
+  <depend>rospy</depend>
+  <depend>std_msgs</depend>
 
-  <build_depend>std_msgs</build_depend>
   <build_depend>message_generation</build_depend>
-
-  <exec_depend>std_msgs</exec_depend>
   <exec_depend>message_runtime</exec_depend>
 </package>

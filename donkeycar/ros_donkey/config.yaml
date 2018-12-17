@@ -1,0 +1,33 @@
+joy:
+  dev: "/dev/input/js0"
+
+donkey_joy:
+  axis_linear: 1
+  axis_angular: 3
+  scale_linear: 1.0
+  scale_angular: 1.0
+
+raspicam_node:
+  camera_frame_id: raspicam
+  camera_id: 0
+  camera_info_url: package://raspicam_node/camera_info/camerav1_1280x720.yaml
+  camera_name: camerav1_1280x720
+  enable_raw: false
+  exposure_mode: antishake
+  framerate: 90 # high frame-rate to reduce motion blur
+  height: 120
+  width: 160
+  ISO: 800
+
+servos:
+  pwm_frequency: 50
+  throttle:
+    channel: 0
+    center: 320
+    direction: 1
+    range: 120
+  steering:
+    channel: 1
+    center: 325
+    direction: 1
+    range: 160
