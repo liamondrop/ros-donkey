@@ -84,12 +84,12 @@ roslaunch ros_donkey vehicle.launch
 
 This will bring up the servo actuator, joystick controller, and raspicam nodes.
 
-## Still left TODO
+## Todo
 
  - Implement the Keras node
  - Add Timestamp to Actuator commands so that events are properly synced
  - Saving to Rosbags for replay and training
- - State machine for managing drive mode (manual vs autonomous)
+ - Manage drive mode (manual vs autonomous)
  - Local Web Controller for video streaming and control from a phone/computer
  - Build everything from scratch to make sure I didn't leave out some crucial steps in setup (probably did, sorry)
 
