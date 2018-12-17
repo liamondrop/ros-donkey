@@ -12,7 +12,7 @@ class Joy:
 
         # initialize joy subscriber and drive publisher
         rospy.Subscriber('joy', sensor_msgs.msg.Joy, self.joy_cb_)
-        self.drive_pub = rospy.Publisher('servos_drive',
+        self.drive_pub = rospy.Publisher('donkey/drive',
                                          geometry_msgs.msg.Twist,
                                          queue_size=10)
 
