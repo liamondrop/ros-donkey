@@ -7,6 +7,9 @@
 
   <license>MIT</license>
 
+  <url type="repository">https://github.com/liamondrop/ros-donkey</url>
+  <url type="bugtracker">https://github.com/liamondrop/ros-donkey/issues</url>
+
   <buildtool_depend>catkin</buildtool_depend>
 
   <depend>adafruit-pca9685-pip</depend>
