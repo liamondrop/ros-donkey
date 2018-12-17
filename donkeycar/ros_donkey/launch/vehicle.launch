@@ -4,5 +4,6 @@
 
   <node name="donkey_actuator" pkg="donkey_actuator" type="donkey_actuator_node" />
   <node name="donkey_joy" pkg="donkey_joy" type="donkey_joy_node" />
+  <node name="joy_node" pkg="joy" type="joy_node" respawn="true" />
   <node name="raspicam_node" pkg="raspicam_node" type="raspicam_node" />
 </launch>
