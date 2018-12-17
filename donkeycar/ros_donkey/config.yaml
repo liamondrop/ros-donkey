@@ -25,9 +25,9 @@ servos:
     channel: 0
     center: 320
     direction: 1
-    range: 120
+    range: 100
   steering:
     channel: 1
     center: 325
     direction: 1
-    range: 160
+    range: 180
