@@ -13,8 +13,16 @@ def map_value_to_pwm_(servo, value):
     return int(pulse)
 
 
+class ActuatorException(Exception):
+    pass
+
+
 class Actuator:
     def __init__(self):
+        if not rospy.has_param('servos'):
+            rospy.logfatal('No servos configuration found. Shutting down actuator node')
+            raise ActuatorException('no servos config')
+
         self.servos = rospy.get_param('servos')
         self.controller = Adafruit_PCA9685.PCA9685()
         self.controller.set_pwm_freq(self.servos.get('pwm_frequency'))
@@ -26,7 +34,7 @@ class Actuator:
         # initiate subscribers
         rospy.Subscriber('donkey/servo_absolute', donkey_actuator.msg.Servo,
                          self.servo_absolute_cb_)
-        rospy.Subscriber('donkey/drive', geometry_msgs.msg.Twist,
+        rospy.Subscriber('donkey/drive', geometry_msgs.msg.TwistStamped,
                          self.servos_drive_cb_, queue_size=10)
 
     def servo_absolute_cb_(self, msg):
@@ -58,8 +66,8 @@ class Actuator:
         at 75% throttle:
         $ rostopic pub /donkey/drive geometry_msgs/Twist "{linear: {x: 0.75}, angular: {z: 0.0}}"
         """
-        self.set_servo_proportional_(self.servos['steering'], msg.angular.z)
-        self.set_servo_proportional_(self.servos['throttle'], msg.linear.x)
+        self.set_servo_proportional_(self.servos['steering'], msg.twist.angular.z)
+        self.set_servo_proportional_(self.servos['throttle'], msg.twist.linear.x)
 
     def set_servo_center_(self, servo):
         self.set_servo_pulse_(servo, servo['center'])
