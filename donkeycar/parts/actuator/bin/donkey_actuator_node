@@ -9,7 +9,7 @@ if __name__ == '__main__':
         rospy.init_node('donkey_actuator')
         a = Actuator()
         rospy.spin()
-    except ActuatorException:
-        pass
+    except ActuatorException as e:
+        rospy.logfatal('{} Shutting down actuator node'.format(e))
     except rospy.ROSInterruptException:
         pass

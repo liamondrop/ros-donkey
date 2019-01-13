@@ -20,8 +20,7 @@ class ActuatorException(Exception):
 class Actuator:
     def __init__(self):
         if not rospy.has_param('servos'):
-            rospy.logfatal('No servos configuration found. Shutting down actuator node')
-            raise ActuatorException('no servos config')
+            raise ActuatorException('Servos not configured')
 
         self.servos = rospy.get_param('servos')
         self.controller = Adafruit_PCA9685.PCA9685()
@@ -32,31 +31,31 @@ class Actuator:
         rospy.sleep(1)
 
         # initiate subscribers
-        rospy.Subscriber('donkey/servo_absolute', donkey_actuator.msg.Servo,
-                         self.servo_absolute_cb_)
+        rospy.Subscriber('donkey/servo_pulse', donkey_actuator.msg.Servo,
+                         self.servo_pulse_cb_)
         rospy.Subscriber('donkey/drive', geometry_msgs.msg.TwistStamped,
-                         self.servos_drive_cb_, queue_size=10)
+                         self.drive_cb_, queue_size=10)
 
-    def servo_absolute_cb_(self, msg):
+    def servo_pulse_cb_(self, msg):
         """
-        Callback function for the servo_absolute topic. Intended as a utility
+        Callback function for the donkey/servo_pulse topic. Intended as a utility
         to help properly configure a servo's range of pulse values.
 
         The following are an example of finding the steering servo's center, i.e. 333:
-        $ rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 300}"
-        $ rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 350}"
-        $ rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 330}"
-        $ rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 335}"
-        $ rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 333}"
+        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 300}"
+        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 350}"
+        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 330}"
+        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 335}"
+        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 333}"
         """
         servo = self.servos[msg.name]
         self.set_servo_pulse_(servo, int(msg.value))
         rospy.loginfo('servo: {}, channel: {}, value: {}'.format(
             msg.name, servo['channel'], int(msg.value)))
 
-    def servos_drive_cb_(self, msg):
+    def drive_cb_(self, msg):
         """
-        Callback function for the servos_drive topic
+        Callback function for the donkey/drive topic
 
         Sets the values for the steering and throttle servos using s standard
         geometry_msgs/Twist message. The linear.x component controls the

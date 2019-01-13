@@ -61,13 +61,13 @@ The `raspicam_node` repository mentioned above in dependencies will help you get
 
 The `donkey_actuator` node listens to two topics:
 
- - `/donkey/servo_absolute`: this topic accepts a `donkey_actuator/Servo` message. The main purpose of this topic is to send pwm signals to help you fine tune the configuration of your servos. The following messages are an example of using this topic to find the pulse value corresponding to the steering servo's center, i.e. 333:
+ - `/donkey/servo_pulse`: this topic accepts a `donkey_actuator/ServoPulse` message. The main purpose of this topic is to send pwm signals to help you fine tune the configuration of your servos. The following messages are an example of using this topic to find the pulse value corresponding to the steering servo's center, i.e. 333:
     ```
-    rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 300}"
-    rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 350}"
-    rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 330}"
-    rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 335}"
-    rostopic pub /donkey/servo_absolute donkey_actuator/Servo "{name: steering, value: 333}"
+    rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 300}"
+    rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 350}"
+    rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 330}"
+    rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 335}"
+    rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 333}"
     ```
  - `/donkey/drive`: this topic is intended for control and accepts a standard `geometry_msgs/Twist` message, using the `linear.x` value for the throttle and the `angular.z` value for the steering. Note that these values should be between -1.0 and 1.0 inclusive. The following is an example of a command to drive straight forward at 75% throttle:
     ```
