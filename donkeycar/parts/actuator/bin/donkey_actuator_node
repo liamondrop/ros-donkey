@@ -6,10 +6,10 @@ from donkey_actuator.actuator import Actuator, ActuatorException
 
 if __name__ == '__main__':
     try:
-        rospy.init_node('donkey_actuator')
+        rospy.init_node('donkey_actuator', log_level=rospy.INFO)
         a = Actuator()
         rospy.spin()
     except ActuatorException as e:
-        rospy.logfatal('{} Shutting down actuator node'.format(e))
+        rospy.logfatal('{}. Shutting down actuator node'.format(e))
     except rospy.ROSInterruptException:
         pass

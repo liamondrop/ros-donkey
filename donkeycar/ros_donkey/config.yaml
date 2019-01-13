@@ -1,19 +1,6 @@
 joy_node:
-  dev: /dev/input/js0
-  coalesce_interval: 0.01
-
-teleop:
-  drive:
-    type: topic
-    message_type: geometry_msgs/TwistStamped
-    topic_name: donkey/drive
-    axis_mappings:
-      - axis: 1
-        target: twist.linear.x
-        scale: 1.0
-      - axis: 3
-        target: twist.angular.z
-        scale: 1.0
+  deadzone: 0.01
+  coalesce_interval: 0.0333
 
 raspicam_node:
   camera_frame_id: raspicam
@@ -39,3 +26,16 @@ servos:
     center: 325
     direction: 1
     range: 180
+
+teleop:
+  drive:
+    type: topic
+    message_type: geometry_msgs/TwistStamped
+    topic_name: donkey/drive
+    axis_mappings:
+      - axis: 1
+        target: twist.linear.x
+        scale: 1.0
+      - axis: 3
+        target: twist.angular.z
+        scale: 1.0

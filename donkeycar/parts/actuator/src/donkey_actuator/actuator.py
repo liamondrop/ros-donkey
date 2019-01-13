@@ -1,7 +1,6 @@
 import Adafruit_PCA9685
 import rospy
-
-import donkey_actuator.msg
+import donkey_msgs.msg
 import geometry_msgs.msg
 
 
@@ -31,7 +30,7 @@ class Actuator:
         rospy.sleep(1)
 
         # initiate subscribers
-        rospy.Subscriber('donkey/servo_pulse', donkey_actuator.msg.Servo,
+        rospy.Subscriber('donkey/servo_pulse', donkey_msgs.msg.ServoPulse,
                          self.servo_pulse_cb_)
         rospy.Subscriber('donkey/drive', geometry_msgs.msg.TwistStamped,
                          self.drive_cb_, queue_size=10)
@@ -42,11 +41,11 @@ class Actuator:
         to help properly configure a servo's range of pulse values.
 
         The following are an example of finding the steering servo's center, i.e. 333:
-        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 300}"
-        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 350}"
-        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 330}"
-        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 335}"
-        $ rostopic pub /donkey/servo_pulse donkey_actuator/ServoPulse "{name: steering, value: 333}"
+        $ rostopic pub /donkey/servo_pulse donkey_msgs/ServoPulse "{name: steering, value: 300}"
+        $ rostopic pub /donkey/servo_pulse donkey_msgs/ServoPulse "{name: steering, value: 350}"
+        $ rostopic pub /donkey/servo_pulse donkey_msgs/ServoPulse "{name: steering, value: 330}"
+        $ rostopic pub /donkey/servo_pulse donkey_msgs/ServoPulse "{name: steering, value: 335}"
+        $ rostopic pub /donkey/servo_pulse donkey_msgs/ServoPulse "{name: steering, value: 333}"
         """
         servo = self.servos[msg.name]
         self.set_servo_pulse_(servo, int(msg.value))
@@ -58,15 +57,18 @@ class Actuator:
         Callback function for the donkey/drive topic
 
         Sets the values for the steering and throttle servos using s standard
-        geometry_msgs/Twist message. The linear.x component controls the
+        geometry_msgs/TwistStamped message. The linear.x component controls the
         throttle, and the angular.z component controls the steering.
 
         The following is an example of a command to drive straight forward
         at 75% throttle:
-        $ rostopic pub /donkey/drive geometry_msgs/Twist "{linear: {x: 0.75}, angular: {z: 0.0}}"
+        $ rostopic pub /donkey/drive geometry_msgs/TwistStamped \
+            "{twist: {linear: {x: 0.75}, angular: {z: 0.0}}}"
         """
         self.set_servo_proportional_(self.servos['steering'], msg.twist.angular.z)
+        rospy.loginfo('servo: steering, value: {}'.format(msg.twist.angular.z))
         self.set_servo_proportional_(self.servos['throttle'], msg.twist.linear.x)
+        rospy.loginfo('servo: throttle, value: {}'.format(msg.twist.linear.x))
 
     def set_servo_center_(self, servo):
         self.set_servo_pulse_(servo, servo['center'])
