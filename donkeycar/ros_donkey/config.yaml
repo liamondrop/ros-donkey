@@ -1,6 +1,7 @@
 joy_node:
-  deadzone: 0.01
+  auto_repeat_rate: 30
   coalesce_interval: 0.0333
+  deadzone: 0.01
 
 raspicam_node:
   camera_frame_id: raspicam

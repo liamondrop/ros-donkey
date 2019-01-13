@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+import os
+import rospy
+from donkey_keras.data import Datastore, DatastoreException
+from donkey_keras.model import KerasLinear
+
+
+if __name__ == '__main__':
+    try:
+        rospy.init_node('donkey_keras_train', log_level=rospy.INFO)
+        params = rospy.get_param('donkey_keras_train')
+
+        ds = Datastore(bag_path=os.path.expanduser(params['bag_path']),
+                       bag_topics=params['bag_topics'],
+                       sample_freq_hz=params['sample_freq_hz'])
+        train_gen, val_gen = ds.get_train_val_gen(params['X_keys'],
+                                                  params['y_keys'],
+                                                  params['batch_size'],
+                                                  params['train_test_split'])
+
+        total_records = len(ds.df)
+        total_train = int(total_records * params['train_test_split'])
+        total_val = total_records - total_train
+        rospy.loginfo('train: %d, validation: %d' % (total_train, total_val))
+        steps_per_epoch = total_train // params['batch_size']
+        rospy.loginfo('steps_per_epoch: %d' % steps_per_epoch)
+
+        kl = KerasLinear()
+        new_model_path = os.path.expanduser(params['new_model_path'])
+        if params['base_model_path'] is not '':
+            kl.load(os.path.expanduser(params['base_model_path']))
+
+        kl.train(train_gen,
+                 val_gen,
+                 saved_model_path=new_model_path,
+                 steps=steps_per_epoch,
+                 train_split=params['train_test_split'])
+    except DatastoreException as e:
+        rospy.logfatal('{}. Shutting down keras_train node'.format(e))
+    except rospy.ROSInterruptException:
+        pass
