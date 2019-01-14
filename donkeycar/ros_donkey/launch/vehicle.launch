@@ -12,7 +12,7 @@
   <node name="joy_teleop" pkg="joy_teleop" type="joy_teleop.py" />
   <node name="donkey_actuator" pkg="donkey_actuator" type="donkey_actuator_node" />
   <node name="raspicam_node" pkg="raspicam_node" type="raspicam_node" />
-  <group if="$(arg model)">
+  <group if="$(eval arg('model') != '')">
     <node name="donkey_keras_drive" pkg="donkey_keras" type="donkey_keras_drive_node" output="screen">
       <param name="model_path" value="$(arg model)" />
     </node>
