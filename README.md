@@ -24,7 +24,7 @@ The arrows represent various inputs and outputs (the names of these omitted to k
 
 ![ROS Donkey Architecture](./images/ros_donkey_architecture.png)
 
-The bits in gray haven't yet been implemented, and the rosbag recording hasn't been attempted yet, though it should work without too much extra fuss.
+The bits in gray haven't yet been implemented yet.
 
 ## Dependencies
 
@@ -115,7 +115,8 @@ roslaunch donkey_keras train.launch ... base_model:=/my/model/dir/basemodel
 
  - Manage drive mode (manual vs autonomous)
  - Start recording with a joystick command
- - Load training data from multiple ROS bags
+ - Add deadman switch to autonomous mode for safety
+ - Support loading training data from multiple ROS bags (currently only supports 1 at a time)
  - Local Web Controller for video streaming and control from a phone/computer
  - Build everything from scratch to make sure I didn't leave out some crucial steps in setup (probably did, sorry)
 
