@@ -108,7 +108,7 @@ To train an existing model, use the `base_model` argument, like so:
 roslaunch donkey_keras train.launch ... base_model:=/my/model/dir/basemodel
 ```
 
-**Note that you'll still need to provide the path to your rosbag data as well as a path to the place where you want to save your data. Also note that you'll need to use an absolute path for each of these arguments, or else relative to your home directory (`~`).**
+**Note that you'll still need to provide the bag and model arguments. Also note that you'll need to use an absolute path for each of these arguments, or else relative to your home directory (`~`).**
 
 
 ## Todo
