@@ -14,5 +14,8 @@
 
   <buildtool_depend>catkin</buildtool_depend>
 
-  <depend>rospy</depend>
+  <depend>joy</depend>
+  <depend>joy_teleop</depend>
+  <depend>raspicam_node</depend>
+  <depend>rosbag</depend>
 </package>

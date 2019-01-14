@@ -9,13 +9,13 @@
   <rosparam>
     donkey_keras_train:
       bag_topics:
-        - /donkey/image
+        - /raspicam_node/image/compressed
         - /donkey/drive
       batch_size: 128
       sample_freq_hz: 30.0
       train_test_split: 0.8
       X_keys:
-        - donkey_image__data
+        - raspicam_node_image_compressed__data
       y_keys:
         - donkey_drive__twist_angular_z
         - donkey_drive__twist_linear_x

@@ -25,7 +25,7 @@ class KerasPilot:
         self.drive_pub = rospy.Publisher('donkey/drive',
                                          geometry_msgs.msg.TwistStamped,
                                          queue_size=10)
-        self.image_sub = rospy.Subscriber('/donkey/image',
+        self.image_sub = rospy.Subscriber('/raspicam_node/image/compressed',
                                           sensor_msgs.msg.CompressedImage,
                                           self.image_cb_, queue_size=1)
 
