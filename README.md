@@ -82,14 +82,38 @@ Issue the following command to start up the car:
 roslaunch ros_donkey vehicle.launch
 ```
 
-This will bring up the servo actuator, joystick controller, and raspicam nodes.
+This will bring up the servo actuator, joystick controller, and raspicam nodes, allowing you to drive the vehicle manually.
+
+### Recording Data
+
+To record driving data, like camera frames and joystick commands to a rosbag, use the following command:
+
+```
+roslaunch ros_donkey vehicle.launch record:=true
+```
+
+This will save the images from the camera to the `/raspicam_node/image/compressed` topic and the joystick commands to the `/donkey/drive` topic as `TwistStamped` messages in a bagfile. The bag file will be automatically named according to the current timestamp and saved in the `~/.ros` directory.
+
+### Training a Model
+
+In order to train a model with your recorded rosbag data, give the path to the rosbag data you want to use as your input, as well as a path to the location for saving the model, with the following command:
+
+```
+roslaunch donkey_keras train.launch bag:=/my/data/dir/bag-file-name.bag model:=/my/model/dir/mymodel
+```
+
+To train an existing model, use the `base_model` argument, like so:
+
+```
+roslaunch donkey_keras train.launch ... base_model:=/my/model/dir/basemodel
+```
+
 
 ## Todo
 
- - Implement the Keras node
- - Add Timestamp to Actuator commands so that events are properly synced
- - Saving to Rosbags for replay and training
  - Manage drive mode (manual vs autonomous)
+ - Start recording with a joystick command
+ - Load training data from multiple ROS bags
  - Local Web Controller for video streaming and control from a phone/computer
  - Build everything from scratch to make sure I didn't leave out some crucial steps in setup (probably did, sorry)
 

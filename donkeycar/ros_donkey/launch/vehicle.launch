@@ -2,6 +2,7 @@
 <launch>
   <!-- args -->
   <arg name="record" default="false" />
+  <arg name="model" default="" />
 
   <!-- params -->
   <rosparam command="load" file="$(find ros_donkey)/config.yaml" />
@@ -11,6 +12,11 @@
   <node name="joy_teleop" pkg="joy_teleop" type="joy_teleop.py" />
   <node name="donkey_actuator" pkg="donkey_actuator" type="donkey_actuator_node" />
   <node name="raspicam_node" pkg="raspicam_node" type="raspicam_node" />
+  <group if="$(arg model)">
+    <node name="donkey_keras_drive" pkg="donkey_keras" type="donkey_keras_drive_node" output="screen">
+      <param name="model_path" value="$(arg model)" />
+    </node>
+  </group>
   <group if="$(arg record)">
     <node name="record_bag" pkg="rosbag" type="record" args="-a" output="screen" />
   </group>
