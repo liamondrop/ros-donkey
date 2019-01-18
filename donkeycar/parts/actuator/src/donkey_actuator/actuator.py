@@ -23,7 +23,7 @@ class Actuator:
 
         self.servos = rospy.get_param('servos')
         self.controller = Adafruit_PCA9685.PCA9685()
-        self.controller.set_pwm_freq(self.servos.get('pwm_frequency'))
+        self.controller.set_pwm_freq(self.servos.get('pwm_frequency', 50))
 
         # send center pulse to throttle servo to calibrate ESC
         self.set_servo_center_(self.servos['throttle'])
@@ -32,8 +32,8 @@ class Actuator:
         # initiate subscribers
         rospy.Subscriber('donkey/servo_pulse', donkey_msgs.msg.ServoPulse,
                          self.servo_pulse_cb_)
-        rospy.Subscriber('donkey/drive', geometry_msgs.msg.TwistStamped,
-                         self.drive_cb_, queue_size=10)
+        rospy.Subscriber('donkey/drive', geometry_msgs.msg.Twist,
+                         self.drive_cb_)
 
     def servo_pulse_cb_(self, msg):
         """
@@ -57,18 +57,17 @@ class Actuator:
         Callback function for the donkey/drive topic
 
         Sets the values for the steering and throttle servos using s standard
-        geometry_msgs/TwistStamped message. The linear.x component controls the
+        geometry_msgs/Twist message. The linear.x component controls the
         throttle, and the angular.z component controls the steering.
 
         The following is an example of a command to drive straight forward
         at 75% throttle:
-        $ rostopic pub /donkey/drive geometry_msgs/TwistStamped \
-            "{twist: {linear: {x: 0.75}, angular: {z: 0.0}}}"
+        $ rostopic pub /donkey/drive geometry_msgs/Twist "{linear: {x: 0.75}, angular: {z: 0.0}}"
         """
-        self.set_servo_proportional_(self.servos['steering'], msg.twist.angular.z)
-        rospy.loginfo('servo: steering, value: {}'.format(msg.twist.angular.z))
-        self.set_servo_proportional_(self.servos['throttle'], msg.twist.linear.x)
-        rospy.loginfo('servo: throttle, value: {}'.format(msg.twist.linear.x))
+        self.set_servo_proportional_(self.servos['steering'], msg.angular.z)
+        rospy.loginfo('servo: steering, value: {}'.format(msg.angular.z))
+        self.set_servo_proportional_(self.servos['throttle'], msg.linear.x)
+        rospy.loginfo('servo: throttle, value: {}'.format(msg.linear.x))
 
     def set_servo_center_(self, servo):
         self.set_servo_pulse_(servo, servo['center'])

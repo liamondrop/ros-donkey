@@ -31,7 +31,7 @@ servos:
 teleop:
   drive:
     type: topic
-    message_type: geometry_msgs/TwistStamped
+    message_type: geometry_msgs/Twist
     topic_name: donkey/drive
     axis_mappings:
       - axis: 1
@@ -40,3 +40,10 @@ teleop:
       - axis: 3
         target: twist.angular.z
         scale: 1.0
+  record:
+    type: topic
+    message_type: std_msgs/Bool
+    topic_name: donkey/record
+    axis_mappings:
+      - button: 4
+        target: data
