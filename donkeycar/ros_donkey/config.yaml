@@ -35,10 +35,10 @@ teleop:
     topic_name: donkey/drive
     axis_mappings:
       - axis: 1
-        target: twist.linear.x
+        target: linear.x
         scale: 1.0
       - axis: 3
-        target: twist.angular.z
+        target: angular.z
         scale: 1.0
   record:
     type: topic
