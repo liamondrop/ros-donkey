@@ -5,6 +5,7 @@
 
   <!-- nodes -->
   <node name="donkey_keras_drive" pkg="donkey_keras" type="donkey_keras_drive_node" output="screen">
+    <remap from="/donkey/image" to="/raspicam_node/image/compressed" />
     <param name="model_path" value="$(arg model)" />
   </node>
 </launch>
