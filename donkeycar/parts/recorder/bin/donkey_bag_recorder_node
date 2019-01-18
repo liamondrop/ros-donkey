@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+
+import rospy
+from donkey_bag_recorder.recorder import BagRecorder, BagRecorderException
+
+
+if __name__ == '__main__':
+    try:
+        rospy.init_node('donkey_bag_recorder', log_level=rospy.INFO)
+        recorder = BagRecorder()
+        rospy.spin()
+    except BagRecorderException as e:
+        rospy.logfatal('{}: Shutting down donkey_bag_recorder node'.format(e))
+    except rospy.ROSInterruptException:
+        pass

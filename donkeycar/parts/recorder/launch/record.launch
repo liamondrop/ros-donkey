@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Load configuration parameters -->
+  <arg name="bag_dir" default="~/donkey_ws/data" />
+
+  <!-- Start the node -->
+  <node name="donkey_bag_recorder" pkg="donkey_bag_recorder"
+        type="donkey_bag_recorder_node" output="screen">
+    <param name="bag_dir" value="$(arg bag_dir)" />
+    <remap from="/donkey/image" to="/raspicam_node/image/compressed" />
+  </node>
+</launch>
